@@ -6,7 +6,7 @@ from datetime import datetime as dt
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/old')
 def index():
     return render_template('old_input.html')
 
