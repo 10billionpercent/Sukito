@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  
+  <meta charset="UTF-8">
+  <title>Choose Your Anime Bento</title>
+  <style>
+      :root {
+  --cursor-glow: #FFFA5F;
+}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .contents {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+#cursor-glow {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background-color: var(--cursor-glow);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.9;
+  filter: blur(16px);
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
+}
+
+    body, html {
+      height: 100%;
+      background: linear-gradient(0deg, rgba(1, 16, 24, 0.90) 0%, rgba(1, 16, 24, 0.90) 100%), url('../static/background.jpg') lightgray 50% / cover no-repeat;
+    }
+
+    h1 {
+      font-family: 'Shantell Sans', cursive;
+      color:  rgba(211, 239, 255, 1);
+      font-size: 32px;
+    }
+
+    p {
+      font-family: 'Inter', sans-serif;
+      color: rgba(211, 239, 255, 1);
+      font-size: 16px;
+    }
+
+    img {
+      width: 100px;
+      height: auto;
+    }
+
+    .header-text {
+        display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 8px;
+    }
+
+    .website-header {
+        padding: 16px 200px;
+        display: flex;
+        flex-direction: row;
+align-items: center;
+gap: 320px;
+    }
+    .bento-tooltip {
+  transform: translate(calc(-100% + 10px));
+  margin-left: 4px;
+  margin-right: 4px;
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  background-color: rgba(1, 16, 24, 1.0);
+  color: #D3EFFF;
+  padding: 12px;
+  border-radius: 10px;
+  width: 250px;
+box-shadow: 4px 4px 15px 0px #00A6FF;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  z-index: 100;
+   opacity: 0;
+  pointer-events: auto;
+  transition: opacity 0.6s ease-in-out; 
+}
+
+
+.bento-tooltip img {
+  width: 100%;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+/* Tooltip arrow — pointing top-left-ish (to the logo) */
+.bento-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  right: 16px; /* Adjust this to move the arrow more/less to the side */
+  border-width: 0 10px 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent rgba(1, 16, 24, 0.95) transparent;
+}
+
+.logo-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-dismiss {
+  background: none;
+  border: none;
+  color: #D3EFFF;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 8px;
+  text-align: right;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  text-decoration: underline;
+}
+
+
+.website-header:hover .bento-tooltip {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+    .inputs {
+  display: flex;
+  flex-direction: row;  
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width:auto;
+  height:auto;
+}
+
+.genres {
+    display: flex;
+padding: 16px 16px;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 16px;
+border-radius: 20px;
+background: #011018;
+box-shadow: 4px 4px 50px 0px #00A6FF;
+transition: transform 0.4s ease-in-out;
+}
+
+.genres:hover {
+  transform: translateY(-8px);
+}
+
+.pill-wrapper {
+  display: flex;
+padding: 0 0 0 0;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+gap: 16px;
+}
+
+.genre-row {
+  display: flex;
+padding: 0 0 0 0;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 8px;
+}
+
+.genre-pill {
+    background: #011018;
+font-size: 16px;
+color: #D3EFFF;
+padding: 8px 16px;
+display: flex;
+flex-direction: row;
+gap: 8px;
+border-radius: 100px;
+border: 1px solid #D3EFFF;
+transition: box-shadow 0.2s ease, 
+background-color 0.2s ease,  
+transform 0.1s ease;
+}
+
+.genre-pill img {
+  width: 16px;
+  height: 16px;
+}
+
+.genre-pill:hover {
+  box-shadow: 0 0 10px #00A6FF;
+}
+
+.genre-pill:active {
+    transform: scale(0.99); 
+}
+
+.genre-pill.selected {
+  background-color: #00A6FF;
+  color: #011018;
+  border: none;
+}
+
+.RHS {
+    display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 16px;
+flex-shrink: 0;
+}
+
+.status {
+    display: flex;
+padding: 14px 20px;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 16px;
+border-radius: 20px;
+background: #011810;
+/* Green bento compartment */
+box-shadow: 4px 4px 50px 0px #5FFF96;
+transition: transform 0.4s ease-in-out;
+}
+
+.status:hover {
+  transform: translateY(-8px);
+}
+
+.status-row {
+  display: flex;
+padding: 0 0 0 0;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+gap: 8px;
+}
+
+.status-pill {
+    background: #011810;
+font-size: 16px;
+color: #D3EFFF;
+padding: 8px 16px;
+display: flex;
+flex-direction: row;
+gap: 8px;
+border-radius: 100px;
+border: 1px solid #D3EFFF;
+transition: box-shadow 0.2s ease, 
+background-color 0.2s ease,  
+transform 0.1s ease;
+}
+
+.status-pill img {
+  width: 16px;
+  height: 16px;
+}
+
+.status-pill:hover {
+  box-shadow: 0 0 10px #5FFF96;
+}
+
+.status-pill:active {
+    transform: scale(0.99); 
+}
+
+.status-pill.selected {
+  background-color: #5FFF96;
+  color: #011018;
+  border: none;
+}
+
+
+.slider-container {
+    display: flex;
+    flex-direction: column;
+align-items: center;
+gap: 16px;
+}
+
+  .slider-wrapper {
+      position: relative;
+      width: 360px;
+      margin-top: 40px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: #00A6FF;
+      color:#011018;
+    }
+
+    .slider-tooltip {
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #00A6FF;
+      color: #011018;
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-family: 'Inter';
+      pointer-events: none;
+    }
+
+.year {
+    display: flex;
+padding: 16px 16px;
+flex-direction: column;
+align-items: center;
+gap: 16px;
+border-radius: 20px;
+background: #011018;
+position: relative; 
+width: 100%;
+/* Blue bento compartment */
+box-shadow: 4px 4px 50px 0px #00A6FF;
+transition: transform 0.4s ease-in-out;
+}
+
+.year:hover {
+  transform: translateY(-8px);
+}
+
+.quantity {
+    display: flex;
+padding: 16px 24px;
+flex-direction: column;
+align-items: center;
+gap: 16px;
+border-radius: 20px;
+background: #100118;
+
+/* Purple bento compartment */
+box-shadow: 4px 4px 50px 0px #C75FFF;
+transition: transform 0.4s ease-in-out;
+}
+
+.quantity:hover {
+  transform: translateY(-8px);
+}
+
+.type {
+    display: flex;
+padding: 14px 20px;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 16px;
+border-radius: 20px;
+background: #0D0119;
+width: 100%;
+/* Purple bento compartment */
+box-shadow: 4px 4px 50px 0px #C75FFF;
+transition: transform 0.4s ease-in-out;
+}
+
+.type:hover {
+  transform: translateY(-8px);
+}
+
+.type-help {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+.type-pill {
+    background: #0D0119;
+font-size: 16px;
+color: #D3EFFF;
+padding: 8px 16px;
+display: flex;
+flex-direction: row;
+gap: 8px;
+border-radius: 100px;
+border: 1px solid #D3EFFF;
+transition: box-shadow 0.2s ease, 
+background-color 0.2s ease,  
+transform 0.1s ease;
+}
+
+.type-pill img {
+  width: 16px;
+  height: 16px;
+}
+
+.type-pill:hover {
+  box-shadow: 0 0 10px #C75FFF;
+}
+
+.type-pill:active {
+    transform: scale(0.99); 
+}
+
+.type-pill.selected {
+  background-color: #C75FFF;
+  color: #011018;
+  border: none;
+}
+
+
+.CTA {
+    margin: 0 auto;
+     padding: 12px 24px;
+     font-family: 'Inter';
+     font-size: 18px;
+     color: #011722;
+    background-color: rgba(255, 255, 95, 1);
+gap: 10px;
+border-radius: 20px;
+box-shadow: 4px 4px 10px 0px #FFFF8D;
+border: #FFFF8D 1px solid;
+transition: box-shadow 0.5s ease, 
+background-color 0.5s ease,  
+transform 0.3s ease;
+
+}
+
+.CTA:hover {
+  box-shadow: 0 0 20px #FFF834, 0 0 30px #FFFF8D;
+  transform: translateY(-4px);
+}
+
+.CTA:active {
+  background-color: #FFF834; /* Replace this with your gold color */
+  border: #FFF834 1px solid;
+    transform: scale(0.9); 
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
+}
+
+.shake {
+  animation: shake 0.4s ease;
+}
+
+@keyframes pulseRed {
+  0% {
+    box-shadow: 0 0 0px #FF5F5F;
+  }
+  50% {
+    box-shadow: 0 0 40px #FF5F5F;
+  }
+  100% {
+    box-shadow: 0 0 0px #FF5F5F;
+  }
+}
+
+.pulse-shadow {
+  animation: pulseRed 1.5s infinite ease-in-out;
+}
+
+
+  </style>
+<link rel="icon" href="../static/logo.svg" type="image/x-icon">
+</head>
+<body>
+    <div class="contents">
+   <div class="website-header">
+  <div class="logo-wrapper">
+    <img src="{{ url_for('static', filename='logo.svg') }}" alt="Sukito Logo" id="Sukito-logo">
+    <div class="bento-tooltip">
+    </div>
+  </div>
+  
+  <div class="header-text">
+    <h1>Sukito</h1>
+    <p>Your taste. Your vibe. Your anime bento.</p>
+  </div>
+</div>
+    <div class="inputs">
+    <div class="genres">
+        <h1 style="font-size: 20px;"> Select up to 5 genres. </h1>
+        <div class="pill-wrapper">
+        <div class="genre-row">
+          <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Action </button>
+           <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Adventure </button>
+            <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Cars </button>
+             <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Comedy </button>
+              <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Demons </button>
+               <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Drama </button>
+                <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Fantasy </button>
+                 <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Historical </button>
+                  <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Horror </button>
+          </div>
+        <div class="genre-row">
+          <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Isekai </button>
+           <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Magic </button>
+            <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Mecha </button>
+             <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Military </button>
+              <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Music </button>
+               <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Mystery </button>
+                <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Parody </button>
+                 <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Police </button>
+          </div>
+          <div class="genre-row">
+          <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Psychological </button>
+           <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Romance </button>
+            <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Samurai </button>
+             <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> School </button>
+              <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Sci-Fi </button>
+               <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Slice of Life </button>
+                <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Sports </button>
+                 <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Supernatural </button>
+                 <button class="genre-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Thriller </button>
+          </div>
+        </div>
+        </div>
+    <div class="RHS">
+        <div class="status">
+          <div style="display: flex; flex-direction: column; align-items: center; gap:2px;" >
+                <h1 style="font-size: 20px;"> Select a status. </h1>
+                <p>  Status refers to the release state of the anime. </p>
+                </div>
+          <div class="status-row">
+          <button class="status-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Currently Airing </button>
+           <button class="status-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Completed </button>
+            <button class="status-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> TBA </button>
+          </div>
+          <div class="status-row">
+            <button class="status-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Unreleased </button>
+           <button class="status-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Upcoming </button>
+          </div>
+          <p style="font-size: 14px;"> *TBA = To Be Announced </p>
+            </div>
+        <div class="type">
+        <div style="display: flex; flex-direction: column; align-items: center; gap:2px;" >
+                <h1 style="font-size: 20px;"> Select a type. </h1>
+                <p>  Type refers to the format of the anime. </p>
+                </div>
+          <div class="status-row">
+          <button class="type-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> TV </button>
+           <button class="type-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Movie </button>
+            <button class="type-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Music </button>
+          </div>
+           <div class="status-row">
+          <button class="type-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> Special </button>
+           <button class="type-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> OVA </button>
+           <button class="type-pill"> <img src="{{ url_for('static', filename='add.svg') }}"> ONA </button>
+          </div>
+          <div class="type-help">
+          <p style="font-size: 14px;"> *OVA = Original Video Animation, </p>
+           <p style="font-size: 14px;"> ONA = Original Net Animation </p>
+           </div>
+            </div>
+            
+    </div>
+      <div class="slider-container">
+<div id="no-anime-modal" class="pulse-shadow" style="
+  display: none;
+    flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  background: #011018;
+  padding: 12px;
+  border-radius: 20px;
+  box-shadow: 4px 4px 20px 0px #FF5F5F;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+  height: 100%;
+margin-bottom: 20px;
+gap:4px;
+transition: box-shadow 0.5s ease, 
+opacity 1.0s ease;
+">
+  <p>Sorry! No anime found for this combo. Please try again.</p> 
+  <div id="pill-container" style="display: grid; grid-template-columns: repeat(3, 1fr); justify-content: center; gap: 2px;">
+  </div>
+</div>
+        <div class="year"> 
+            <h1 style="font-size: 20px;"> Select a year.</h1>
+    <div class="slider-wrapper">       
+    <div id="year-tooltip" style="display:none; opacity:0; transition: opacity 0.2s ease;" class="slider-tooltip">2000</div>
+    <input type="range" id="year" min="1960" max="2025" value="2000">
+    </div> 
+            </div>
+        <div class ="quantity">
+            <h1 style="font-size: 20px;"> How many anime to serve?</h1>
+    <div class="slider-wrapper">       
+    <div id="qty-tooltip" class="slider-tooltip" style="background: #C75FFF;">10</div>
+    <input type="range" id="qty" min="5" max="20" value="10" style="accent-color: #C75FFF;" style="accent-color: #C75FFF;">
+    </div> 
+    </div>
+        </div>   
+  <div id="cursor-glow"></div> 
+   </div>  
+  <form action="/recommend" method="POST" id="anime-form" style="display: flex; flex-direction: row; align-items: center;">
+  <input type="hidden" name="source" value="new">
+  <button class="CTA"> Let's go! </button>
+  <div class="surprise-tooltip" style="display:none;">Itadakimasu!</div>
+  </form> 
+</body>
+   <script>
+  const glow = document.getElementById("cursor-glow");
+  const tooltip = document.querySelector('.bento-tooltip');
+const header = document.querySelector('.website-header');
+
+  document.addEventListener("mousemove", (e) => {
+    glow.style.left = e.clientX + "px";
+    glow.style.top = e.clientY + "px";
+  });
+
+  const sections = [
+    { class: 'genres', color: '#00A6FF' },   
+    { class: 'year', color: '#00A6FF' },     
+    { class: 'type', color: '#CC5CFF' },     
+    { class: 'quantity', color: '#CC5CFF' },
+    { class: 'status', color: '#59FF9D' }    
+  ];
+
+  sections.forEach(({ class: cls, color }) => {
+    const el = document.querySelector(`.${cls}`);
+    if (el) {
+      el.addEventListener("mouseenter", () => {
+        document.documentElement.style.setProperty('--cursor-glow', color);
+      });
+      el.addEventListener("mouseleave", () => {
+        document.documentElement.style.setProperty('--cursor-glow', '#FFFA5F'); 
+      });
+    }
+  });
+
+  let tooltipVisible = true;
+let wasDismissed = false;
+
+const firstTimeHeader = "Wondering what a Bento is?";
+const reentryHeader = "Welcome back to Bento mode.";
+  
+  const tips = [
+    "A traditional Japanese lunchbox with neatly arranged compartments — just like how we serve your anime picks.",
+    "Think of bento as an organized meal box. Here, it’s your personalized anime selection.",
+    "Bento means balance and structure. That’s how we recommend anime to you.",
+    "Each anime you choose fits into a bento-style layout — simple, neat, curated.",
+    "This is your anime bento. Every pick, a tasty little mood.",
+    "We serve anime the bento way: no mess, just the best.",
+    "Neatly packed anime. Carefully portioned. Surprisingly addictive.",
+    "Just like bento: pretty outside, solid content inside.",
+     "A bento box = a perfect combo of flavors. Here, it's a perfect combo of anime.",
+  "Call it a lunchbox if you want — but it's also your personalized anime tray.",
+  "Organized anime recommendations. Clean like a bento. That’s the idea.",
+   "Once a simple Japanese meal box.Now, your custom anime feast."
+  ];
+
+  const animeBentoTips = [
+    "Just like a bento box — your anime picks are neatly packed for max flavor.",
+    "Bento doesn’t just mean neat. It means *crafted*. So are your anime picks.",
+    "You pick the vibe. We box it up in bento form. Easy.",
+    "Neatly arranged anime servings. One genre per compartment. Zero chaos.",
+    "Like a bento box — small, powerful doses of anime joy.",
+    "Every anime recommendation fits into your mood tray. Balanced and binge-ready.",
+    "Bento isn’t just food. It’s a vibe — like your personal anime playlist.",
+    "Your watchlist? Bento-fied. Balanced, portioned, and satisfying.",
+    "Think of this as a lunchbox of stories. Each one a bite-sized adventure.",
+    "Anime served like bento: compact, complete, and always aesthetic.",
+    "We bento-wrap your taste into handpicked anime bundles.",
+    "Your mood = our menu. Bento-style anime recs, no filler.",
+  ];
+ function updateTooltipContent() {
+  const headerText = wasDismissed
+    ? reentryHeader
+    : firstTimeHeader;
+
+  const tip = wasDismissed
+    ? animeBentoTips[Math.floor(Math.random() * animeBentoTips.length)]
+    : tips[Math.floor(Math.random() * tips.length)];
+
+  tooltip.innerHTML = `
+    <img src="../static/bento.png">
+    <h1 style="font-size:14px;">${headerText}</h1>
+    <p style="font-size:14px;">${tip}</p>
+    <button class="tooltip-dismiss">Got it! Hide this. (Click header to bring it back)</button>
+  `;
+
+  addDismissLogic();
+}
+
+function addDismissLogic() {
+  const dismissBtn = document.querySelector('.tooltip-dismiss');
+  dismissBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    tooltipVisible = false;
+    wasDismissed = true;
+    tooltip.style.opacity = 0;
+    tooltip.style.pointerEvents = 'none';
+  });
+}
+
+// Show tooltip on hover — only if it's still allowed
+header.addEventListener('mouseenter', () => {
+  if (tooltipVisible) {
+    tooltip.style.opacity = 1;
+    tooltip.style.pointerEvents = 'auto';
+  }
+});
+
+header.addEventListener('mouseleave', () => {
+  if (tooltipVisible) {
+    tooltip.style.opacity = 0;
+    tooltip.style.pointerEvents = 'none';
+  }
+});
+
+// Re-enable tooltip + re-randomize on click
+header.addEventListener('click', () => {
+  tooltipVisible = true;
+  updateTooltipContent(); // change header + tip
+  tooltip.style.opacity = 1;
+  tooltip.style.pointerEvents = 'auto';
+});
+
+const yearSlider = document.getElementById('year');
+const yearTooltip = document.getElementById('year-tooltip');
+
+    function updateYear() {
+      const sliderWidth = yearSlider.offsetWidth;
+  const tooltipWidth = yearTooltip.offsetWidth;
+  const min = parseInt(yearSlider.min);
+  const max = parseInt(yearSlider.max);
+  const val = parseInt(yearSlider.value);
+
+  yearTooltip.textContent = val;
+
+  const percent = (val - min) / (max - min);
+  let offset = sliderWidth * percent;
+
+  // Clamp: avoid left and right flying out
+  const maxOffset = sliderWidth - tooltipWidth / 2;
+  const minOffset = tooltipWidth / 2;
+
+  // Clamp to within slider bounds
+  offset = Math.max(minOffset, Math.min(offset, maxOffset));
+
+  yearTooltip.style.left = `${offset}px`;
+    }
+
+    yearSlider.addEventListener('input', updateYear);
+    window.addEventListener('load', updateYear); // set initial position
+
+const qtySlider = document.getElementById('qty');
+const qtyTooltip = document.getElementById('qty-tooltip');
+
+    function updateQty() {
+      const sliderWidth = qtySlider.offsetWidth;
+  const tooltipWidth = qtyTooltip.offsetWidth;
+  const min = parseInt(qtySlider.min);
+  const max = parseInt(qtySlider.max);
+  const val = parseInt(qtySlider.value);
+
+  qtyTooltip.textContent = val;
+
+  const percent = (val - min) / (max - min);
+  let offset = sliderWidth * percent;
+
+  // Clamp: avoid left and right flying out
+  const maxOffset = sliderWidth - tooltipWidth / 2;
+  const minOffset = tooltipWidth / 2;
+
+  // Clamp to within slider bounds
+  offset = Math.max(minOffset, Math.min(offset, maxOffset));
+
+  qtyTooltip.style.left = `${offset}px`;
+    }
+
+    qtySlider.addEventListener('input', updateQty);
+    window.addEventListener('load', updateQty); // set initial position
+
+
+updateTooltipContent(); // Add this line right before 
+
+function shakeElement(el) {
+  el.classList.add('shake');
+  setTimeout(() => el.classList.remove('shake'), 400); // remove after animation
+}
+
+let yearTouched = false;
+let qtyTouched = false;
+
+yearSlider.addEventListener('input', () => {
+  if (!yearTouched) {
+    yearTooltip.style.display = 'block';
+    yearTooltip.style.opacity = 1; // show tooltip only once on first touch
+    yearTouched = true;
+  }
+  updateYear();
+});
+
+qtySlider.addEventListener('input', () => {
+  updateQty(); // your custom tooltip updater
+  qtyTouched = true;
+});
+
+// GENRE — Max 5
+document.querySelectorAll('.genre-pill').forEach(button => {
+  button.addEventListener('click', () => {
+    const selected = document.querySelectorAll('.genre-pill.selected');
+    const isAlreadySelected = button.classList.contains('selected');
+
+    if (isAlreadySelected) {
+      button.classList.remove('selected');
+      button.querySelector('img').src = "../static/add.svg";
+    } else if (selected.length < 5) {
+      button.classList.add('selected');
+      button.querySelector('img').src = "../static/remove.svg";
+      button.style.transform = "scale(1.0)";
+    } else {
+      selected.forEach(btn => shakeElement(btn)); // your shake function
+    }
+  });
+});
+
+// TYPE — Only 1
+document.querySelectorAll('.type-pill').forEach(button => {
+  button.addEventListener('click', () => {
+    const selected = document.querySelectorAll('.type-pill.selected');
+    const isAlreadySelected = button.classList.contains('selected');
+
+    if (isAlreadySelected) {
+      button.classList.remove('selected');
+      button.querySelector('img').src = "../static/add.svg";
+    } else if (selected.length === 0) {
+      button.classList.add('selected');
+      button.querySelector('img').src = "../static/remove.svg";
+      button.style.transform = "scale(1.0)";
+    } else {
+      selected.forEach(btn => shakeElement(btn));
+    }
+  });
+});
+
+// STATUS — Only 1
+document.querySelectorAll('.status-pill').forEach(button => {
+  button.addEventListener('click', () => {
+    const selected = document.querySelectorAll('.status-pill.selected');
+    const isAlreadySelected = button.classList.contains('selected');
+
+    if (isAlreadySelected) {
+      button.classList.remove('selected');
+      button.querySelector('img').src = "../static/add.svg";
+    } else if (selected.length === 0) {
+      button.classList.add('selected');
+      button.querySelector('img').src = "../static/remove.svg";
+      button.style.transform = "scale(1.0)";
+    } else {
+      selected.forEach(btn => shakeElement(btn));
+    }
+  });
+});
+
+const statusMap = {
+  "currently airing": "current",
+  "completed": "finished",
+  "tba": "tba",
+  "unreleased": "unreleased",
+  "upcoming": "upcoming"
+};
+
+const typeMap = {
+  "tv": "TV",
+  "movie": "movie",
+  "music": "music",
+  "special": "special",
+  "ova": "OVA",
+  "ona": "ONA"
+};
+
+document.querySelector('.CTA').addEventListener('click', () => {
+  const form = document.getElementById("anime-form");
+
+  // Clear existing hidden inputs if re-clicked
+  form.querySelectorAll("input[name='genres'], input[name='status'], input[name='type'], input[name='year'], input[name='qty'], input[name='error']").forEach(el => el.remove());
+
+  // GENRES
+  const genrePills = document.querySelectorAll('.genre-pill.selected');
+  const genres = Array.from(genrePills).map(btn =>
+    btn.textContent.trim().toLowerCase()
+  );
+
+  if (genres.length > 5) {
+    const err = document.createElement("input");
+    err.type = "hidden";
+    err.name = "error";
+    err.value = "Too many genres selected!";
+    form.appendChild(err);
+    form.submit();
+    return;
+  }
+
+  if (genres.length > 0) {
+    const genreInput = document.createElement("input");
+    genreInput.type = "hidden";
+    genreInput.name = "genres";
+    genreInput.value = genres.join(",");
+    form.appendChild(genreInput);
+  }
+
+  // STATUS (mapped to kitsu)
+  const statusBtn = document.querySelector(".status-pill.selected");
+  if (statusBtn) {
+    const raw = statusBtn.textContent.trim().toLowerCase();
+    const mapped = statusMap[raw] || raw;
+
+    const statusInput = document.createElement("input");
+    statusInput.type = "hidden";
+    statusInput.name = "status";
+    statusInput.value = mapped;
+    form.appendChild(statusInput);
+  }
+
+  // TYPE (mapped to kitsu)
+  const typeBtn = document.querySelector(".type-pill.selected");
+  if (typeBtn) {
+    const raw = typeBtn.textContent.trim().toLowerCase();
+    const mapped = typeMap[raw] || raw;
+
+    const typeInput = document.createElement("input");
+    typeInput.type = "hidden";
+    typeInput.name = "type";
+    typeInput.value = mapped;
+    form.appendChild(typeInput);
+  }
+
+  // YEAR (only if touched)
+  if (yearTouched) {
+    const yearInput = document.createElement("input");
+    yearInput.type = "hidden";
+    yearInput.name = "year";
+    yearInput.value = yearSlider.value;
+    form.appendChild(yearInput);
+  }
+
+  // QTY (only if touched)
+  if (qtyTouched) {
+    const qtyInput = document.createElement("input");
+    qtyInput.type = "hidden";
+    qtyInput.name = "qty";
+    qtyInput.value = qtySlider.value;
+    form.appendChild(qtyInput);
+  }
+
+  // Submit form to Flask
+  form.submit();
+});
+{% if no_anime %}
+  window.addEventListener('load', () => {
+    const modal = document.getElementById("no-anime-modal");
+    if (modal) {
+      modal.style.display = "flex";
+      modal.style.flexDirection = "column";
+      modal.style.opacity = '0'; // Start from invisible
+
+      const appliedFilters = {{ animefilters | safe }};
+      const container = document.getElementById("pill-container");
+
+      function createPill(text, color) {
+        const pill = document.createElement("div");
+        pill.textContent = text;
+        pill.style.backgroundColor = color;
+        pill.style.color = "#011018";
+        pill.style.borderRadius = "20px";
+        pill.style.padding = "6px 12px";
+        pill.style.fontFamily = "Inter, sans-serif";
+        pill.style.margin = "4px";
+        pill.style.boxShadow = "2px 2px 6px rgba(0,0,0,0.2)";
+        pill.style.alignItems = "center";
+        container.appendChild(pill);
+      }
+
+      // Genre pills (blue)
+      (appliedFilters.genres || []).forEach(genre => {
+        createPill(genre, "#00A6FF");
+      });
+
+      // Year pill (blue)
+      if (appliedFilters.year) {
+        createPill(appliedFilters.year, "#00A6FF");
+      }
+
+      // Type pill (purple)
+      if (appliedFilters.type) {
+        createPill(appliedFilters.type, "#CC5CFF");
+      }
+
+      // Status pill (green)
+      if (appliedFilters.status) {
+        createPill(appliedFilters.status, "#59FF9D");
+      }
+
+      // 🔥 Animate fade-in after a tick
+      setTimeout(() => {
+        modal.style.opacity = '1';
+      }, 10);
+
+      // 🧼 Clear existing timeout if re-fired
+      if (window.alertTimeout) clearTimeout(window.alertTimeout);
+
+      // ⏳ Fade out after 3 seconds
+      window.alertTimeout = setTimeout(() => {
+        modal.style.opacity = '0';
+        setTimeout(() => modal.style.display = 'none', 1000); // Wait for fade-out to finish
+      }, 5000);
+    }
+  });
+  // If force_redirect is passed, redirect back to /new on refresh
+if (performance.navigation.type === 1) { // 1 = user reloaded the page
+  window.location.href = "/new";
+}
+{% endif %}
+</script>
+</html>

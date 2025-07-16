@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> User Input </title>
+    <style>
+        /* Your existing styles */
+        h1 {
+            font-family: 'Oswald', sans-serif;
+            font-weight: bold;
+            color: #d35fed;
+            font-size: 50px;
+            text-shadow: 2px 2px 2px white;
+            margin-right: 20px; 
+            text-align: center; 
+        }
+        body {
+            background-color: #272829;
+        }
+        h2 {
+            font-family: 'Oswald', sans-serif;
+            font-weight: bold;
+            color: #5faded;
+            font-size: 22px; /* Increased font size */
+            text-align: center;
+            text-shadow: 1px 1px 2px rgb(97, 190, 233);
+            margin: 5px 0;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 90%;
+            margin: auto;
+        }
+        input {
+            font-family: 'Georgia', serif;
+            color: white;
+            background-color: #111212;
+            text-align: center;
+            border: 2px solid white;
+            border-radius: 5px;
+            width: 95%;
+            height: 50px;
+            font-size: 16px;
+        }
+        p {
+            font-family: 'Georgia', serif;
+            color: white;
+            font-size: 16px;
+        }
+        button {
+            font-family: 'Georgia', serif;
+            background-color: #133ae8;
+            color: white;
+            width: 200px;
+            height: 100px;
+            padding: 10px;
+            font-size: 20px;
+            margin: 20px auto;
+            display: block;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>        
+</head>
+<body>
+    <h1>Streamscout Anime Finder</h1>
+    <form action="/recommend" method="POST">
+    <input type="hidden" name="source" value="old">
+    <div class="container">
+        <div>
+            <h2> Enter genre </h2>
+            <input name="genres" type="text" placeholder="Enter genre" />
+        </div>
+        <div>
+            <h2> Enter year </h2>
+            <input name="year" type="text" placeholder="Enter year" />
+        </div>
+        <div>
+            <h2> Enter status </h2>
+            <input name="status" type="text" placeholder="Enter status" />
+        </div>
+        <div>
+            <h2> TV or movie? </h2>
+            <input name="type" type="text" placeholder="Enter type" />
+        </div>
+    </div>
+
+    <div style="text-align: center;">
+        <button type="submit" style="height: 50px;">Submit</button>
+    </div>
+</form>
+</body>
+</html>
