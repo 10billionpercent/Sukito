@@ -104,7 +104,8 @@ def start_workflow():
         print(values_to_send)
         if not anime_list:
            print(True)
-           return render_template("new_input.html", no_anime=True, animefilters=values_to_send)
+           return render_template("new_input.html", no_anime=True, animefilters=values_to_send, force_redirect=True)
+
 
         else:
             template_to_render = "new_output.html" if source=="new" else "old_output.html"
