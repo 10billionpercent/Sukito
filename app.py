@@ -6,9 +6,13 @@ from datetime import datetime as dt
 app = Flask(__name__)
 
 
+@app.route('/')
+def root_redirect():
+    return redirect('/old')
+
 @app.route('/old')
-def index():
-    return render_template('old_input.html')
+def upload():
+    return render_template("old_input.html")
 
 @app.route('/new')
 def new_input():
