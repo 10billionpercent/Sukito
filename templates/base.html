@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Streamscout Anime Finder{% endblock %}</title>
+    <title>{% block title %}Testing{% endblock %}</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -15,7 +15,9 @@
     {% block extra_css %}{% endblock %}
 </head>
 <body>
-    {% block content %}{% endblock %}
+    {% block content %}
+    {% include "components/header.html" %}
+    {% endblock %}
 
     <script>
         document.addEventListener("mousemove", (e) => {
@@ -28,5 +30,6 @@
     </script>
 
     {% block extra_js %}{% endblock %}
+<div id="cursor-glow"></div> 
 </body>
 </html>
