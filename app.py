@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def root_redirect():
-    return redirect('/old')
+    return render_template("base.html")
 
 @app.route('/old')
 def upload():
