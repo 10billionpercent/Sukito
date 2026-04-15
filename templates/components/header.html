@@ -1,15 +1,22 @@
-<div class="website-header">
-  <div class="logo-wrapper">
-    <img src="{{ url_for('static', filename='logo.svg') }}" alt="Sukito Logo" id="Sukito-logo">
-    <div class="bento-tooltip">
+  <div class="container-fluid">
+    <div class="row align-items-center">
+      <div class="col-6 d-flex justify-content-end">
+        <img
+          src="{{ url_for('static', filename='logo.svg') }}"
+          alt="Sukito Logo"
+          id="Sukito-logo"
+          class="img-fluid me-3"
+        >
+        <div class="bento-tooltip mt-2"></div>
+      </div>
+
+      <div class="col-6">
+        <h1 class="heading mb-2">Sukito</h1>
+        <p class="mb-0">Your taste. Your vibe. Your anime bento.</p>
+      </div>
     </div>
   </div>
-  
-  <div class="header-text">
-    <h1>Sukito</h1>
-    <p>Your taste. Your vibe. Your anime bento.</p>
-  </div>
-</div>
+
 
 <script>
 const tooltip = document.querySelector('.bento-tooltip')
@@ -65,7 +72,6 @@ function updateTooltipContent() {
     <p style="font-size:14px">${tip}</p>
     <button class="tooltip-dismiss">Got it! Hide this. (Click header to bring it back)</button>
   `
-  console.log("updated")
   addDismissLogic()
 }
 
@@ -83,7 +89,6 @@ function addDismissLogic() {
 updateTooltipContent()
 
 header.addEventListener('mouseenter', () => {
-  console.log(tooltip, header)
   if (tooltipVisible) {
     tooltip.style.opacity = 1
     tooltip.style.pointerEvents = 'auto'

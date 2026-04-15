@@ -9,7 +9,7 @@ body, html {
     background: linear-gradient(0deg, rgba(1, 16, 24, 0.90) 0%, rgba(1, 16, 24, 0.90) 100%), url('../static/background.jpg') lightgray 50% / cover no-repeat;
 }
 
-h1 {
+.heading {
     font-family: 'Shantell Sans', cursive;
     color:  rgba(211, 239, 255, 1);
     font-size: 32px;
@@ -49,11 +49,9 @@ img {
 }
 
 .website-header {
-    padding: 16px 200px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 320px;
 }
 
 .bento-tooltip {
@@ -94,10 +92,6 @@ img {
     border-color: transparent transparent rgba(1, 16, 24, 0.95) transparent;
 }
 
-.logo-wrapper {
-    position: relative;
-    display: inline-block;
-}
 
 .tooltip-dismiss {
     background: none;
