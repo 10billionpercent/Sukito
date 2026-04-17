@@ -1,21 +1,23 @@
-<div class="container-fluid d-flex flex-nowrap justify-content-center p-4" id="website-header">
-  <div class="row g-4">
-    <div class="col-lg-6 w-auto">
-        <div class="logo-wrapper">
-          <img src="{{ url_for('static', filename='logo.svg') }}" alt="Sukito Logo" id="Sukito-logo">
-          <div class="bento-tooltip"></div>
-        </div>
+<div class="container-fluid p-4 d-flex justify-content-center" id="website-header">
+  <div class="d-inline-flex align-items-center gap-4">
+    <div class="flex-shrink-0">
+      <div class="logo-wrapper">
+        <img src="{{ url_for('static', filename='logo.svg') }}" alt="Sukito Logo" id="sukito-logo">
+        <div class="bento-tooltip"></div>
+      </div>
     </div>
-    <div class="col-lg-6 text-center w-auto">
-        <h1>Sukito</h1>
-        <p class="text-nowrap">Your taste. Your vibe. Your anime bento.</p>
+
+    <div style="min-width:0;">
+      <h1 class="mb-1">Sukito</h1>
+      <p class="mb-0">Your taste. Your vibe.<br>Your anime bento.</p>
     </div>
   </div>
 </div>
 
+
 <script>
 const tooltip = document.querySelector('.bento-tooltip')
-const header = document.querySelector('.website-header')
+const header = document.querySelector('#website-header')
 
 let tooltipVisible = true
 let wasDismissed = false
@@ -63,8 +65,8 @@ function updateTooltipContent() {
 
   tooltip.innerHTML = `
     <img src="{{ url_for('static', filename='bento.png') }}">
-    <h1 style="font-size:14px">${headerText}</h1>
-    <p style="font-size:14px">${tip}</p>
+    <h6>${headerText}</h6>
+    <p>${tip}</p>
     <button class="tooltip-dismiss">Got it! Hide this. (Click header to bring it back)</button>
   `
   console.log("updated")
