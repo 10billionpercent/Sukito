@@ -1,4 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+    
 body, html {
     height: 100%;
     background: linear-gradient(0deg, rgba(1, 16, 24, 0.90) 0%, rgba(1, 16, 24, 0.90) 100%), url('../static/background.jpg') lightgray 50% / cover no-repeat;
+}
+
+h1 {
+    font-family: 'Shantell Sans', cursive;
+    color:  #D3EFFF !important;
+    font-size: 32px;
+}
+
+p {
+    font-family: 'Inter', sans-serif;
+    color: rgba(211, 239, 255, 1);
+    font-size: 16px;
+}
+
+img {
+    width: 100px;
+    height: auto;
+}
+
+#cursor-glow {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background-color: #FFFA5F;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.9;
+  filter: blur(16px);
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
+}
+
+.header-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.website-header {
+    padding: 16px 200px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 320px;
+}
+
+.bento-tooltip {
+    transform: translate(calc(-100% + 10px));
+    margin-left: 4px;
+    margin-right: 4px;
+    position: absolute;
+    top: 110%;
+    left: 50%;
+    background-color: rgba(1, 16, 24, 1.0);
+    color: #D3EFFF;
+    padding: 12px;
+    border-radius: 10px;
+    width: 250px;
+    box-shadow: 4px 4px 15px 0px #00A6FF;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: auto;
+    transition: opacity 0.6s ease-in-out; 
+}
+
+.bento-tooltip img {
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.bento-tooltip::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: 16px; 
+    border-width: 0 10px 10px 10px;
+    border-style: solid;
+    border-color: transparent transparent rgba(1, 16, 24, 0.95) transparent;
+}
+
+.logo-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-dismiss {
+    background: none;
+    border: none;
+    color: #D3EFFF;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 8px;
+    text-align: right;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    text-decoration: underline;
+}
+
+.website-header:hover .bento-tooltip {
+    opacity: 1;
+    pointer-events: auto;
 }
