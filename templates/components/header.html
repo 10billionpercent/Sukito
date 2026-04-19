@@ -3,7 +3,12 @@
     <div class="flex-shrink-0">
       <div class="logo-wrapper">
         <img src="{{ url_for('static', filename='logo.svg') }}" alt="Sukito Logo" id="sukito-logo">
-        <div class="bento-tooltip"></div>
+        <div class="bento-tooltip">
+          <img src="{{ url_for('static', filename='bento.png') }}">
+          <h6 class="bento-tooltip-title"></h6>
+          <p class="bento-tooltip-text"></p>
+          <button class="tooltip-dismiss">Got it! Hide this. (Click header to bring it back)</button>
+        </div>
       </div>
     </div>
 
@@ -17,6 +22,9 @@
 
 <script>
 const tooltip = document.querySelector('.bento-tooltip')
+const tooltipTitle = document.querySelector('.bento-tooltip-title')
+const tooltipText = document.querySelector('.bento-tooltip-text')
+const dismissBtn = document.querySelector('.tooltip-dismiss')
 const header = document.querySelector('#website-header')
 
 let tooltipVisible = true
@@ -55,6 +63,7 @@ const animeBentoTips = [
     "Your mood = our menu. Bento-style anime recs, no filler.",
 ]
 function updateTooltipContent() {
+  if (!tooltipTitle || !tooltipText) return
   const headerText = wasDismissed
     ? reentryHeader
     : firstTimeHeader
@@ -63,31 +72,14 @@ function updateTooltipContent() {
     ? animeBentoTips[Math.floor(Math.random() * animeBentoTips.length)]
     : tips[Math.floor(Math.random() * tips.length)]
 
-  tooltip.innerHTML = `
-    <img src="{{ url_for('static', filename='bento.png') }}">
-    <h6>${headerText}</h6>
-    <p>${tip}</p>
-    <button class="tooltip-dismiss">Got it! Hide this. (Click header to bring it back)</button>
-  `
-    addDismissLogic()
-}
-
-function addDismissLogic() {
-  const dismissBtn = document.querySelector('.tooltip-dismiss')
-  dismissBtn.addEventListener('click', (e) => {
-    e.stopPropagation()
-    tooltipVisible = false
-    wasDismissed = true
-    tooltip.style.opacity = 0
-    tooltip.style.pointerEvents = 'none'
-  })
+  tooltipTitle.textContent = headerText
+  tooltipText.textContent = tip
 }
 
 updateTooltipContent()
 
 if (tooltip && header) {
   header.addEventListener('mouseenter', () => {
-    console.log(tooltip, header)
     if (tooltipVisible) {
       tooltip.style.opacity = 1
       tooltip.style.pointerEvents = 'auto'
@@ -103,9 +95,19 @@ if (tooltip && header) {
 
   header.addEventListener('click', () => {
     tooltipVisible = true
-    updateTooltipContent() 
+    updateTooltipContent()
     tooltip.style.opacity = 1
     tooltip.style.pointerEvents = 'auto'
+  })
+}
+
+if (tooltip && dismissBtn) {
+  dismissBtn.addEventListener('click', (e) => {
+    e.stopPropagation()
+    tooltipVisible = false
+    wasDismissed = true
+    tooltip.style.opacity = 0
+    tooltip.style.pointerEvents = 'none'
   })
 }
 </script>
