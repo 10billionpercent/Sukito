@@ -1,5 +1,5 @@
 <div class="container-fluid p-4 d-flex justify-content-center" id="website-header">
-  <div class="d-inline-flex align-items-center gap-4">
+  <div class="d-inline-flex align-items-center gap-4 gap-lg-5">
     <div class="flex-shrink-0">
       <div class="logo-wrapper">
         <img src="{{ url_for('static', filename='logo.svg') }}" alt="Sukito Logo" id="sukito-logo">
@@ -9,7 +9,7 @@
 
     <div style="min-width:0;">
       <h1 class="mb-1">Sukito</h1>
-      <p class="mb-0">Your taste. Your vibe.<br>Your anime bento.</p>
+      <p class="mb-0 text-lg-nowrap">Your taste. Your vibe.<br class="d-block d-lg-none"><span class="d-none d-lg-inline"> </span>Your anime bento.</p>
     </div>
   </div>
 </div>
@@ -37,7 +37,7 @@ const tips = [
     "A bento box = a perfect combo of flavors. Here, it's a perfect combo of anime.",
     "Call it a lunchbox if you want — but it's also your personalized anime tray.",
     "Organized anime recommendations. Clean like a bento. That’s the idea.",
-    "Once a simple Japanese meal box.Now, your custom anime feast."
+    "Once a simple Japanese meal box. Now, your custom anime feast."
 ]
 
 const animeBentoTips = [
@@ -69,8 +69,7 @@ function updateTooltipContent() {
     <p>${tip}</p>
     <button class="tooltip-dismiss">Got it! Hide this. (Click header to bring it back)</button>
   `
-  console.log("updated")
-  addDismissLogic()
+    addDismissLogic()
 }
 
 function addDismissLogic() {
