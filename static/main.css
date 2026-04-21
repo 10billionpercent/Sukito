@@ -119,5 +119,23 @@ p {
 }
 
 .genre-pill {
-    background: #011018;
+    background: var(--genre-unselected);
+}
+
+.genre-pill:hover {
+  box-shadow: 0 0 10px var(--genre-selected);
+}
+
+.genre-pill:active {
+    transform: scale(0.99); 
+}
+
+.genre-pill.selected{
+  background-color: var(--genre-selected);
+  color: var(--genre-unselected);
+  border: none;
+}
+
+.genre-pill.selected i {
+    color: var(--genre-unselected);
 }

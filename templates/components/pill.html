@@ -1,1 +1,17 @@
-<button class="pill genre-pill"> <i class="bi bi-plus"></i> Test </button>
+<button type="button" class="pill genre-pill"> <i class="bi bi-plus"></i> Test </button>
+
+<script>
+            document.querySelectorAll(".pill").forEach((pill) => {
+            pill.addEventListener("click", (e) => {
+                e.preventDefault();
+                pill.classList.toggle("selected");
+
+                const icon = pill.querySelector("i.bi");
+                if (!icon) return;
+
+                const isSelected = pill.classList.contains("selected");
+                icon.classList.toggle("bi-plus", !isSelected);
+                icon.classList.toggle("bi-x", isSelected);
+            });
+        });
+</script>
