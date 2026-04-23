@@ -130,7 +130,7 @@ p {
     transform: scale(0.99); 
 }
 
-.genre-pill.selected{
+.genre-pill.selected {
   background-color: var(--genre-selected);
   color: var(--genre-unselected);
   border: none;
@@ -138,4 +138,48 @@ p {
 
 .genre-pill.selected i {
     color: var(--genre-unselected);
+}
+
+.status-pill {
+    background: var(--status-unselected);
+}
+
+.status-pill:hover {
+  box-shadow: 0 0 10px var(--status-selected);
+}
+
+.status-pill:active {
+    transform: scale(0.99); 
+}
+
+.status-pill.selected {
+  background-color: var(--status-selected);
+  color: var(--status-unselected);
+  border: none;
+}
+
+.status-pill.selected i {
+    color: var(--status-unselected);
+}
+
+.type-pill {
+    background: var(--type-unselected);
+}
+
+.type-pill:hover {
+  box-shadow: 0 0 10px var(--type-selected);
+}
+
+.type-pill:active {
+    transform: scale(0.99); 
+}
+
+.type-pill.selected {
+  background-color: var(--type-selected);
+  color: var(--type-unselected);
+  border: none;
+}
+
+.type-pill.selected i {
+    color: var(--type-unselected);
 }
