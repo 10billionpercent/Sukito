@@ -1,17 +1,36 @@
-<button type="button" class="pill genre-pill"> <i class="bi bi-plus"></i> Test </button>
+{# Jinja component-style macro (React-ish "props"). #}
+{% macro Pill(text, variant="genre", selected=false, icon_unselected="plus", icon_selected="x") -%}
+<button
+  type="button"
+  class="pill {{ variant }}-pill{% if selected %} selected{% endif %}"
+  data-icon-unselected="{{ icon_unselected }}"
+  data-icon-selected="{{ icon_selected }}"
+>
+  <i class="bi bi-{% if selected %}{{ icon_selected }}{% else %}{{ icon_unselected }}{% endif %}"></i>
+  {{ text }}
+</button>
+{%- endmacro %}
 
+{% macro PillBehavior() -%}
 <script>
-            document.querySelectorAll(".pill").forEach((pill) => {
-            pill.addEventListener("click", (e) => {
-                e.preventDefault();
-                pill.classList.toggle("selected");
+  if (!window.__pillBound) {
+    window.__pillBound = true;
 
-                const icon = pill.querySelector("i.bi");
-                if (!icon) return;
+    document.addEventListener("click", (e) => {
+      const pill = e.target.closest(".pill");
+      if (!pill) return;
 
-                const isSelected = pill.classList.contains("selected");
-                icon.classList.toggle("bi-plus", !isSelected);
-                icon.classList.toggle("bi-x", isSelected);
-            });
-        });
+      e.preventDefault();
+      pill.classList.toggle("selected");
+
+      const icon = pill.querySelector("i.bi");
+      if (!icon) return;
+
+      const isSelected = pill.classList.contains("selected");
+
+      icon.classList.toggle(`bi-plus`, !isSelected);
+      icon.classList.toggle(`bi-x`, isSelected);
+    });
+  }
 </script>
+{%- endmacro %}

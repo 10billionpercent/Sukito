@@ -18,7 +18,10 @@
 <body>
     {% block content %}
     {% include "components/header.html" %}
-    {% include "components/pill.html" %}
+
+    {% from "components/pill.html" import Pill, PillBehavior %}
+    {{ Pill("MEOWWWW", variant="genre") }}
+    {{ PillBehavior() }}
     {% endblock %}
 
     <script>
