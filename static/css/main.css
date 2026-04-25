@@ -6,7 +6,7 @@
     
 body, html {
     height: 100%;
-    background: linear-gradient(0deg, var(--background-gradient) 0%, var(--background-gradient) 100%), url('../static/images/background.jpg') var(--background-gradient) 50% / cover no-repeat;
+    background: linear-gradient(0deg, var(--background-gradient) 0%, var(--background-gradient) 100%), url('../images/background.jpg') var(--background-gradient) 50% / cover no-repeat;
 }
 
 h1 {
@@ -55,12 +55,12 @@ p {
     position: absolute;
     top: 110%;
     left: 50%;
-    background-color: var(--genre-unselected);
+    background-color: var(--genre-dark);
     color: var(--text-color);
     padding: 12px;
     border-radius: 10px;
     width: 250px;
-    box-shadow: 4px 4px 15px 0px var(--genre-selected);
+    box-shadow: 4px 4px 15px 0px var(--genre-light);
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     line-height: 1.4;
@@ -119,11 +119,11 @@ p {
 }
 
 .genre-pill {
-    background: var(--genre-unselected);
+    background: var(--genre-dark);
 }
 
 .genre-pill:hover {
-  box-shadow: 0 0 10px var(--genre-selected);
+  box-shadow: 0 0 10px var(--genre-light);
 }
 
 .genre-pill:active {
@@ -131,21 +131,21 @@ p {
 }
 
 .genre-pill.selected {
-  background-color: var(--genre-selected);
-  color: var(--genre-unselected);
+  background-color: var(--genre-light);
+  color: var(--genre-dark);
   border: none;
 }
 
 .genre-pill.selected i {
-    color: var(--genre-unselected);
+    color: var(--genre-dark);
 }
 
 .status-pill {
-    background: var(--status-unselected);
+    background: var(--status-dark);
 }
 
 .status-pill:hover {
-  box-shadow: 0 0 10px var(--status-selected);
+  box-shadow: 0 0 10px var(--status-light);
 }
 
 .status-pill:active {
@@ -153,21 +153,21 @@ p {
 }
 
 .status-pill.selected {
-  background-color: var(--status-selected);
-  color: var(--status-unselected);
+  background-color: var(--status-light);
+  color: var(--status-dark);
   border: none;
 }
 
 .status-pill.selected i {
-    color: var(--status-unselected);
+    color: var(--status-dark);
 }
 
 .type-pill {
-    background: var(--type-unselected);
+    background: var(--type-dark);
 }
 
 .type-pill:hover {
-  box-shadow: 0 0 10px var(--type-selected);
+  box-shadow: 0 0 10px var(--type-light);
 }
 
 .type-pill:active {
@@ -175,11 +175,11 @@ p {
 }
 
 .type-pill.selected {
-  background-color: var(--type-selected);
-  color: var(--type-unselected);
+  background-color: var(--type-light);
+  color: var(--type-dark);
   border: none;
 }
 
 .type-pill.selected i {
-    color: var(--type-unselected);
+    color: var(--type-dark);
 }
