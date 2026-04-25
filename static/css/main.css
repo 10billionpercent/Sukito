@@ -19,6 +19,14 @@ p {
     font-family: var(--body-font);
     color: var(--text-color);
     font-size: clamp(0.5rem, 3.5vw, 1rem) !important;
+    margin: 0;
+}
+
+h2 {
+    font-family: var(--heading-font);
+    color:  var(--text-color) !important;
+    font-size: clamp(1rem, 5vw, 1.25rem) !important;
+    margin: 0;
 }
 
 #sukito-logo {
@@ -85,9 +93,9 @@ p {
     background: none;
     border: none;
     color: var(--text-color);
-    font-size: 12px;
+    font-size: 0.75rem;
     cursor: pointer;
-    margin-top: 8px;
+    margin-top: 0.5rem;
     text-align: right;
     padding: 0;
     font-family: 'Inter', sans-serif;
@@ -100,13 +108,13 @@ p {
 }
 
 .pill {
-    font-size: 16px;
+    font-size: 1rem;
     color: var(--text-color);
-    padding: 8px 16px;
+    padding: 0.5rem 1rem;
     display: flex;
     flex-direction: row;
-    gap: 8px;
-    border-radius: 100px;
+    gap: 0.5rem;
+    border-radius: 100rem;
     border: 1px solid var(--text-color);
     transition: box-shadow 0.2s ease, 
     background-color 0.2s ease,  
@@ -114,7 +122,7 @@ p {
 }
 
 .pill i {
-    font-size: 16px;
+    font-size: 1rem;
     color: var(--text-color);    
 }
 
@@ -183,3 +191,46 @@ p {
 .type-pill.selected i {
     color: var(--type-dark);
 }
+
+
+.inputs {
+  display: flex;
+  flex-direction: row;  
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: auto;
+  height: auto;
+}
+
+
+.compartment {
+  display: flex;
+  padding: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 1.25rem;
+  transition: transform 0.4s ease-in-out;
+}
+
+.compartment:hover {
+  transform: translateY(-8px);
+}
+
+.genre-compartment {
+  background: var(--genre-dark);
+  box-shadow: 4px 4px 50px 0px var(--genre-light);
+}
+
+.status-compartment {
+  background: var(--status-dark);
+  box-shadow: 4px 4px 50px 0px var(--status-light);
+}
+
+.type-compartment {
+  background: #0D0119;
+  box-shadow: 4px 4px 50px 0px #C75FFF;
+}
+

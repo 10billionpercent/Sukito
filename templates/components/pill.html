@@ -1,4 +1,4 @@
-{% macro Pill(text, variant="genre", selected=false, icon_unselected="plus", icon_selected="x") -%}
+{% macro Pill(text, variant, selected=false, icon_unselected="plus", icon_selected="x") -%}
 <button
   type="button"
   class="pill {{ variant }}-pill{% if selected %} selected{% endif %}"

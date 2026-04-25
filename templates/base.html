@@ -17,12 +17,14 @@
 </head>
 <body>
     {% block content %}
+    {% from "components/compartment.html" import Compartment %}
     {% include "components/header.html" %}
 
-    {% from "components/pill.html" import Pill %}
-    {{ Pill("MEOWWWW", variant="genre") }}
-    {{ Pill("MEOWWWW", variant="status") }}
-    {{ Pill("MEOWWWW", variant="type") }}
+    <div class="inputs">
+        {{ Compartment('Select up to 5 genres.', ['meow', 'meoww'], 'genre') }}
+        {{ Compartment('Select a status.', ['meow', 'meoww'], 'status', 'Status refers to the release state of the anime.', ['*TBA = To Be Announced']) }}
+        {{ Compartment('Select a type.', ['meow', 'meoww'], 'type', 'Type refers to the format of the anime.', ['*OVA = Original Video Animation', 'ONA = Original Net Animation']) }}
+    </div>
     {% endblock %}
 
     <script src="{{ url_for('static', filename='js/cursorGlow.js') }}" defer></script>

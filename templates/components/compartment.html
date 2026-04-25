@@ -1,0 +1,19 @@
+{% from "components/pill.html" import Pill %}
+
+{% macro Compartment(title, pills, variant, helper_text='', full_forms=[]) -%}
+
+<div class="compartment {{ variant }}-compartment">
+<h2> {{ title }} </h2> 
+<p> {{ helper_text }}</p>  
+{% for pill in pills %}
+    {{ Pill(pill, variant=variant) }}
+{% endfor %}
+
+<div class="d-flex flex-column gap-0">
+    {% for ff in full_forms %}
+        <p> {{ ff }} </p>
+    {% endfor %}
+</div>
+</div>
+
+{%- endmacro %}
