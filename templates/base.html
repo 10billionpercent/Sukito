@@ -21,7 +21,7 @@
     {% include "components/header.html" %}
 
     <div class="inputs">
-        {{ Compartment('Select up to 5 genres.', ['meow', 'meoww'], 'genre') }}
+        {{ Compartment('Select up to 5 genres.', ['Action', 'Adventure', 'Cars', 'Comedy', 'Demons', 'Drama', 'Fantasy', 'Historical', 'Horror', 'Isekai', 'Magic', 'Mecha', 'Military', 'Music', 'Mystery', 'Parody', 'Police', 'Psychological', 'Romance', 'Samurai', 'School', 'Sci-Fi', 'Slice of Life', 'Space', 'Sports', 'Supernatural', 'Thriller'], 'genre') }}
         {{ Compartment('Select a status.', ['meow', 'meoww'], 'status', 'Status refers to the release state of the anime.', ['*TBA = To Be Announced']) }}
         {{ Compartment('Select a type.', ['meow', 'meoww'], 'type', 'Type refers to the format of the anime.', ['*OVA = Original Video Animation', 'ONA = Original Net Animation']) }}
     </div>

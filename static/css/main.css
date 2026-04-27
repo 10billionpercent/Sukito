@@ -110,9 +110,11 @@ h2 {
 .pill {
     font-size: 1rem;
     color: var(--text-color);
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     border-radius: 100rem;
     border: 1px solid var(--text-color);
@@ -219,6 +221,27 @@ h2 {
   transform: translateY(-8px);
 }
 
+.compartment-pills {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
+  align-items: start;
+  gap: 0.75rem 1.5rem;
+}
+
+/* Tune rows per compartment type (controls how many items stack before a new column). */
+.genre-compartment .compartment-pills {
+  grid-template-rows: repeat(9, auto);
+}
+
+.status-compartment .compartment-pills {
+  grid-template-rows: repeat(3, auto);
+}
+
+.type-compartment .compartment-pills {
+  grid-template-rows: repeat(3, auto);
+}
+
 .genre-compartment {
   background: var(--genre-dark);
   box-shadow: 4px 4px 50px 0px var(--genre-light);
@@ -233,4 +256,3 @@ h2 {
   background: #0D0119;
   box-shadow: 4px 4px 50px 0px #C75FFF;
 }
-
