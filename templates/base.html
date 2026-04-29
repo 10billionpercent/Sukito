@@ -21,9 +21,28 @@
     {% include "components/header.html" %}
 
     <div class="inputs">
-        {{ Compartment('Select up to 5 genres.', ['Action', 'Adventure', 'Cars', 'Comedy', 'Demons', 'Drama', 'Fantasy', 'Historical', 'Horror', 'Isekai', 'Magic', 'Mecha', 'Military', 'Music', 'Mystery', 'Parody', 'Police', 'Psychological', 'Romance', 'Samurai', 'School', 'Sci-Fi', 'Slice of Life', 'Space', 'Sports', 'Supernatural', 'Thriller'], 'genre') }}
-        {{ Compartment('Select a status.', ['meow', 'meoww'], 'status', 'Status refers to the release state of the anime.', ['*TBA = To Be Announced']) }}
-        {{ Compartment('Select a type.', ['meow', 'meoww'], 'type', 'Type refers to the format of the anime.', ['*OVA = Original Video Animation', 'ONA = Original Net Animation']) }}
+        {{ Compartment(
+            title='Select up to 5 genres.',
+            pills=['Action', 'Adventure', 'Cars', 'Comedy', 'Demons', 'Drama', 'Fantasy', 'Historical', 'Horror', 'Isekai', 'Magic', 'Mecha', 'Military', 'Music', 'Mystery', 'Parody', 'Police', 'Psychological', 'Romance', 'Samurai', 'School', 'Sci-Fi', 'Slice of Life', 'Space', 'Sports', 'Supernatural', 'Thriller'],
+            variant='genre',
+            comp_type='column'
+        ) }}
+        {{ Compartment(
+            title='Select a status.',
+            pills=['Currently Airing', 'Completed', 'TBA', 'Unreleased', 'Upcoming'],
+            variant='status',
+            comp_type='row',
+            helper_text='Status refers to the release state of the anime.',
+            full_forms=['*TBA = To Be Announced']
+        ) }}
+        {{ Compartment(
+            title='Select a type.',
+            pills=['TV', 'Movie', 'Music', 'Special', 'OVA', 'ONA'],
+            variant='type',
+            comp_type='row',
+            helper_text='Type refers to the format of the anime.',
+            full_forms=['*OVA = Original Video Animation', 'ONA = Original Net Animation']
+        ) }}
     </div>
     {% endblock %}
 
