@@ -19,6 +19,7 @@
     {% block content %}
     {% from "components/compartment.html" import Compartment %}
     {% from "components/slider.html" import Slider %}
+    {% from "components/button.html" import Button %}
     {% include "components/header.html" %}
 
     <div class="container-fluid px-4 px-md-5 px-xl-6 py-3">
@@ -83,6 +84,10 @@
                             max='20',
                             value='10'
                         )}}
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-center">
+                        {{ Button("Let's go!") }}
                     </div>
                 </div>
             </div>

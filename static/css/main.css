@@ -38,7 +38,7 @@ h2 {
   position: fixed;
   width: 20px;
   height: 20px;
-  background-color: var(--default-glow);
+  background-color: var(--yellow-gentle);
   border-radius: 50%;
   pointer-events: none;
   opacity: 0.9;
@@ -315,6 +315,30 @@ input[type="range"] {
 .quantity-slider {
     accent-color: var(--purple-light);
     color: var(--purple-light);
+}
+
+.CTA {
+    margin: 0 auto;
+    padding: 0.75rem 1.5rem;
+    font-family: 'Inter';
+    font-size: 1.25rem;
+    width: fit-content;
+    color: var(--blue-dark);
+    background-color: var(--yellow-intense);
+    border-radius: 1.25rem;
+    box-shadow: 4px 4px 10px 0px var(--yellow-gentle);
+    border: none;
+    transition: box-shadow 0.5s ease, 
+    transform 0.3s ease;
+}
+
+.CTA:hover {
+    box-shadow: 0 0 20px var(--yellow-intense), 0 0 30px var(--yellow-gentle);
+    transform: translateY(-4px);
+}
+
+.CTA:active {
+    transform: scale(0.9); 
 }
 
 @media (max-width: 991.98px) {
