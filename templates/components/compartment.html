@@ -1,13 +1,13 @@
 {% from "components/pill.html" import Pill %}
 
-{% macro Compartment(title, pills, variant, comp_type, helper_text='', full_forms=[]) -%}
+{% macro Compartment(field, title, pills, color, comp_type, helper_text='', full_forms=[]) -%}
 
-<div class="compartment {{ variant }}-compartment">
+<div class="compartment {{ color }}-compartment" id="{{ field }}-compartment">
 <h2> {{ title }} </h2> 
 <p> {{ helper_text }}</p>  
 <div class="{{ comp_type }}-grid">
 {% for pill in pills %}
-    {{ Pill(pill, variant=variant) }}
+    {{ Pill(pill, variant=field) }}
 {% endfor %}
 </div>
 

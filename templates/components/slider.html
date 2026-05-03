@@ -1,0 +1,19 @@
+{% macro Slider(field, title, color, min, max, value) -%}
+<div class="compartment {{ color }}-compartment">
+  <h2>{{ title }}</h2>
+  <div class="slider-wrapper">
+    <div id="{{ field }}-tooltip" class="slider-tooltip {{ field }}-tooltip">
+      {{ value }}
+    </div>
+    <input
+      type="range"
+      id="{{ field }}"
+      min="{{ min }}"
+      max="{{ max }}"
+      value="{{ value }}"
+      class="{{ field }}-slider"
+    />
+  </div>
+</div>
+
+{%- endmacro %} 

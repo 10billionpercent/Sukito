@@ -18,37 +18,65 @@
 <body>
     {% block content %}
     {% from "components/compartment.html" import Compartment %}
+    {% from "components/slider.html" import Slider %}
     {% include "components/header.html" %}
 
-    <div class="inputs">
-        {{ Compartment(
-            title='Select up to 5 genres.',
-            pills=['Action', 'Adventure', 'Cars', 'Comedy', 'Demons', 'Drama', 'Fantasy', 'Historical', 'Horror', 'Isekai', 'Magic', 'Mecha', 'Military', 'Music', 'Mystery', 'Parody', 'Police', 'Psychological', 'Romance', 'Samurai', 'School', 'Sci-Fi', 'Slice of Life', 'Space', 'Sports', 'Supernatural', 'Thriller'],
-            variant='genre',
-            comp_type='column'
-        ) }}
-        {{ Compartment(
-            title='Select a status.',
-            pills=['Currently Airing', 'Completed', 'TBA', 'Unreleased', 'Upcoming'],
-            variant='status',
-            comp_type='row',
-            helper_text='Status refers to the release state of the anime.',
-            full_forms=['*TBA = To Be Announced']
-        ) }}
-        {{ Compartment(
-            title='Select a type.',
-            pills=['TV', 'Movie', 'Music', 'Special', 'OVA', 'ONA'],
-            variant='type',
-            comp_type='row',
-            helper_text='Type refers to the format of the anime.',
-            full_forms=['*OVA = Original Video Animation', 'ONA = Original Net Animation']
-        ) }}
+    <div class="container-fluid px-4 px-md-5 px-xl-6 py-3">
+        <div class="row g-4 justify-content-center align-items-start">
+            <div class="col-12 col-lg-6 col-xl-5">
+                {{ Compartment(
+                    title='Select up to 5 genres.',
+                    pills=['Action', 'Adventure', 'Cars', 'Comedy', 'Demons', 'Drama', 'Fantasy', 'Historical', 'Horror', 'Isekai', 'Magic', 'Mecha', 'Military', 'Music', 'Mystery', 'Parody', 'Police', 'Psychological', 'Romance', 'Samurai', 'School', 'Sci-Fi', 'Slice of Life', 'Space', 'Sports', 'Supernatural', 'Thriller'],
+                    field='genre',
+                    color='blue',
+                    comp_type='column'
+                ) }}
+            </div>
+
+            <div class="col-12 col-lg-6 col-xl-5">
+                <div class="row g-4">
+                    <div class="col-12">
+                        {{ Compartment(
+                            title='Select a status.',
+                            pills=['Currently Airing', 'Completed', 'TBA', 'Unreleased', 'Upcoming'],
+                            field='status',
+                            color='green',
+                            comp_type='row',
+                            helper_text='Status refers to the release state of the anime.',
+                            full_forms=['*TBA = To Be Announced']
+                        ) }}
+                    </div>
+
+                    <div class="col-12">
+                        {{ Compartment(
+                            title='Select a type.',
+                            pills=['TV', 'Movie', 'Music', 'Special', 'OVA', 'ONA'],
+                            field='type',
+                            color='purple',
+                            comp_type='row',
+                            helper_text='Type refers to the format of the anime.',
+                            full_forms=['*OVA = Original Video Animation', 'ONA = Original Net Animation']
+                        ) }}
+                    </div>
+                                <div class="col-12 col-lg-6 col-xl-5">
+                {{ Slider(
+                    field='year',
+                    title='Select a year.',
+                    color='blue',
+                    min='1960',
+                    max='2026',
+                    value='2000'
+                )}}
+        </div>
+                </div>
+            </div>
     </div>
     {% endblock %}
 
     <script src="{{ url_for('static', filename='js/cursorGlow.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/tooltip.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/pill.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/slider.js') }}" defer></script>
 
 </body>
 </html>

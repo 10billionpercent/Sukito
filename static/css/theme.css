@@ -4,10 +4,10 @@
     --background-gradient: rgba(1, 16, 24, 0.90);
     --text-color: #D3EFFF;
     --default-glow: #FFFA5F;
-    --genre-dark: #011018;
-    --genre-light: #00A6FF;
-    --status-dark: #011810;
-    --status-light: #5FFF96;
-    --type-dark: #0D0119;
-    --type-light: #C75FFF;
+    --blue-dark: #011018;
+    --blue-light: #00A6FF;
+    --green-dark: #011810;
+    --green-light: #5FFF96;
+    --purple-dark: #0D0119;
+    --purple-light: #C75FFF;
 }
