@@ -22,8 +22,8 @@
     {% include "components/header.html" %}
 
     <div class="container-fluid px-4 px-md-5 px-xl-6 py-3">
-        <div class="row g-4 justify-content-center align-items-start">
-            <div class="col-12 col-lg-6 col-xl-5">
+        <div class="row g-5 justify-content-center align-items-start">
+            <div class="col-12 col-xl-4">
                 {{ Compartment(
                     title='Select up to 5 genres.',
                     pills=['Action', 'Adventure', 'Cars', 'Comedy', 'Demons', 'Drama', 'Fantasy', 'Historical', 'Horror', 'Isekai', 'Magic', 'Mecha', 'Military', 'Music', 'Mystery', 'Parody', 'Police', 'Psychological', 'Romance', 'Samurai', 'School', 'Sci-Fi', 'Slice of Life', 'Space', 'Sports', 'Supernatural', 'Thriller'],
@@ -33,7 +33,7 @@
                 ) }}
             </div>
 
-            <div class="col-12 col-lg-6 col-xl-5">
+            <div class="col-12 col-md-6 col-xl-4">
                 <div class="row g-4">
                     <div class="col-12">
                         {{ Compartment(
@@ -58,16 +58,32 @@
                             full_forms=['*OVA = Original Video Animation', 'ONA = Original Net Animation']
                         ) }}
                     </div>
-                                <div class="col-12 col-lg-6 col-xl-5">
-                {{ Slider(
-                    field='year',
-                    title='Select a year.',
-                    color='blue',
-                    min='1960',
-                    max='2026',
-                    value='2000'
-                )}}
-        </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-xl-3">
+                <div class="row g-4">
+                    <div class="col-12">
+                        {{ Slider(
+                            field='year',
+                            title='Select a year.',
+                            color='blue',
+                            min='1960',
+                            max='2026',
+                            value='2000'
+                        )}}
+                    </div>
+
+                    <div class="col-12">
+                        {{ Slider(
+                            field='quantity',
+                            title='How many anime to serve?',
+                            color='purple',
+                            min='1',
+                            max='20',
+                            value='10'
+                        )}}
+                    </div>
                 </div>
             </div>
     </div>

@@ -277,7 +277,7 @@ h2 {
 
 .slider-wrapper {
     position: relative;
-    width: fit-content;
+    width: 100%;
     height: fit-content;
     margin-top: 2.25rem;
     padding: 1rem;
@@ -304,6 +304,7 @@ h2 {
 
 input[type="range"] {
     width: 100%;
+    display: block;
 }
 
 .year-slider {
