@@ -85,8 +85,10 @@
                             value='10'
                         )}}
                     </div>
-
+                    <form action="/recommend" method="POST" id="anime-form" style="display: flex; flex-direction: row; align-items: center;">
+                    <input type="hidden" name="source" value="new">
                     <div class="col-12 d-flex justify-content-center">
+                    </form>
                         {{ Button("Let's go!") }}
                     </div>
                 </div>
